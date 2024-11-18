@@ -32,16 +32,18 @@ body {
   top: 50%; /* Centraliza verticalmente */
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 18px;
+  font-size: 4vw; /* Usa unidades relativas para ajustar o tamanho da fonte */
   color: #fff; /* Cor branca para contraste */
   font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: center;
   animation: slide-indicator-animation 3s infinite;
   text-align: center; /* Centraliza o texto */
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para melhor visibilidade */
   border-radius: 10px; /* Bordas arredondadas */
+  width: 80%; /* Ajusta a largura para 80% da tela */
 }
 
 .arrows {
