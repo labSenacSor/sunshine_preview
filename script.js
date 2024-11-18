@@ -48,7 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('click', () => {
     const clickSound = document.getElementById('click-sound');
-    clickSound.play();
+    clickSound.play().catch(error => {
+      console.log('Erro ao reproduzir o som:', error);
+    });
     nextScreen();
   });
 });
