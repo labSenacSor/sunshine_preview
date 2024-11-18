@@ -8,8 +8,8 @@ body {
   position: absolute;
   top: 0;
   left: 50%; /* Centraliza horizontalmente */
-  width: 90%;
-  height: 90vh; /* Ajusta a altura para 90% da altura visível da janela */
+  width: 100%;
+  height: 100vh; /* Ajusta a altura para 100% da altura visível da janela */
   background-color: #f0f0f0; /* Cor de fundo padrão */
   transition: opacity 0.5s ease-in-out;
   opacity: 0;
@@ -18,8 +18,9 @@ body {
 
 .screen img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajusta a imagem para cobrir toda a área */
+  height: auto; /* Mantém a proporção da imagem */
+  max-height: 100vh; /* Garante que a imagem não ultrapasse a altura da tela */
+  object-fit: contain; /* Ajusta a imagem para caber dentro da área */
 }
 
 .active {
