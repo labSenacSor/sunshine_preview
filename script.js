@@ -1,56 +1,54 @@
-const screens = document.querySelectorAll('.screen');
-let currentScreen = 0;
+document.addEventListener('DOMContentLoaded', () => {
+  const screens = document.querySelectorAll('.screen');
+  let currentScreenIndex = 0;
 
-screens[currentScreen].classList.add('active'); // Mostra a primeira tela
+  const showScreen = (index) => {
+    screens.forEach((screen, i) => {
+      screen.classList.toggle('active', i === index);
+    });
+  };
 
-// Função para mudar a tela
-function changeScreen() {
-  screens[currentScreen].classList.remove('active');
-  currentScreen = (currentScreen + 1) % screens.length;
-  screens[currentScreen].classList.add('active');
-}
+  const nextScreen = () => {
+    currentScreenIndex = (currentScreenIndex + 1) % screens.length;
+    showScreen(currentScreenIndex);
+  };
 
-// Adiciona evento de clique para mudar a tela
-screens.forEach((screen) => {
-  screen.addEventListener('click', changeScreen);
-});
+  const prevScreen = () => {
+    currentScreenIndex = (currentScreenIndex - 1 + screens.length) % screens.length;
+    showScreen(currentScreenIndex);
+  };
 
-// Variáveis para armazenar a posição inicial do toque
-let startX = 0;
-let startY = 0;
+  let startX, startY;
 
-// Detecta o início do toque
-document.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
-});
+  document.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  });
 
-// Detecta o movimento do toque
-document.addEventListener('touchmove', (e) => {
-  if (!startX || !startY) {
-    return;
-  }
+  document.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = startX - endX;
+    const diffY = startY - endY;
 
-  let endX = e.touches[0].clientX;
-  let endY = e.touches[0].clientY;
-
-  let diffX = startX - endX;
-  let diffY = startY - endY;
-
-  // Verifica se o movimento foi para a esquerda ou para cima
-  if (Math.abs(diffX) > Math.abs(diffY)) {
-    if (diffX > 0) {
-      // Movimento para a esquerda
-      changeScreen();
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) {
+        nextScreen(); // Arraste da direita para a esquerda
+      } else {
+        prevScreen(); // Arraste da esquerda para a direita
+      }
+    } else {
+      if (diffY > 0) {
+        nextScreen(); // Arraste de baixo para cima
+      } else {
+        prevScreen(); // Arraste de cima para baixo
+      }
     }
-  } else {
-    if (diffY > 0) {
-      // Movimento para cima
-      changeScreen();
-    }
-  }
+  });
 
-  // Reseta os valores de início do toque
-  startX = 0;
-  startY = 0;
+  document.addEventListener('click', () => {
+    const clickSound = document.getElementById('click-sound');
+    clickSound.play();
+    nextScreen();
+  });
 });
