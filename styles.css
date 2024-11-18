@@ -29,15 +29,19 @@ body {
 
 .slide-indicator {
   position: absolute;
-  bottom: 20px;
+  top: 50%; /* Centraliza verticalmente */
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   font-size: 18px;
   color: #fff; /* Cor branca para contraste */
   font-weight: bold;
   display: flex;
   align-items: center;
   animation: slide-indicator-animation 3s infinite;
+  text-align: center; /* Centraliza o texto */
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente para melhor visibilidade */
+  border-radius: 10px; /* Bordas arredondadas */
 }
 
 .arrows {
@@ -47,15 +51,15 @@ body {
 
 @keyframes slide-indicator-animation {
   0% {
-    transform: translateX(100%);
+    transform: translate(100%, -50%);
     opacity: 0;
   }
   50% {
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     opacity: 0;
   }
 }
